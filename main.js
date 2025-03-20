@@ -17,6 +17,15 @@ themeToggle.addEventListener('click', () => {
     setTheme(newTheme);
 });
 
+// Mobile menu functionality
+const menuToggle = document.querySelector('.menu-toggle');
+const mobileNav = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+    mobileNav.classList.toggle('active');
+    menuToggle.classList.toggle('active');
+});
+
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -27,24 +36,30 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth',
                 block: 'start'
             });
+            // Close mobile menu when clicking a link
+            mobileNav.classList.remove('active');
+            menuToggle.classList.remove('active');
         }
     });
 });
 
 // Active navigation link highlight
-const sections = document.querySelectorAll('section');
-const navItems = document.querySelectorAll('.nav-item');
+const sections = document.querySelectorAll('section[id]');
 
 function setActiveNavItem() {
     const scrollPosition = window.scrollY;
 
-    sections.forEach((section, index) => {
+    sections.forEach(section => {
         const sectionTop = section.offsetTop - 100;
         const sectionBottom = sectionTop + section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        const correspondingNavItem = document.querySelector(`.nav-link[href="#${sectionId}"]`);
 
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-            navItems.forEach(item => item.classList.remove('active'));
-            navItems[index].classList.add('active');
+        if (correspondingNavItem && scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            correspondingNavItem.classList.add('active');
         }
     });
 }
@@ -52,24 +67,26 @@ function setActiveNavItem() {
 window.addEventListener('scroll', setActiveNavItem);
 
 // Contact form handling
-const contactForm = document.getElementById('contact-form');
+const contactForm = document.querySelector('.contact-form');
 
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-    
-    // Here you would typically send the data to a server
-    console.log('Form submitted:', data);
-    
-    // Clear form
-    contactForm.reset();
-    
-    // Show success message (you can enhance this)
-    alert('Message sent successfully!');
-});
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
+        
+        // Here you would typically send the data to a server
+        console.log('Form submitted:', data);
+        
+        // Clear form
+        contactForm.reset();
+        
+        // Show success message (you can enhance this)
+        alert('Message sent successfully!');
+    });
+}
 
 // Intersection Observer for animations
 const observerOptions = {
@@ -87,7 +104,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements with animations
-document.querySelectorAll('.about-content, .project-card, .contact-form').forEach(el => {
+document.querySelectorAll('.animate').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     observer.observe(el);

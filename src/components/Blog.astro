@@ -36,7 +36,7 @@ const base = import.meta.env.BASE_URL;
                    transition-all duration-300 hover:shadow-lg animate-slide-up"
             style={`animation-delay: ${index * 100}ms`}
           >
-            <a href={`${base}blog/${post.slug}/`} class="block">
+            <a href={`${base.endsWith('/') ? base : base + '/'}blog/${post.slug}/`} class="block">
               <time
                 class="text-sm text-light-textSecondary dark:text-dark-textSecondary"
                 datetime={post.data.publishDate.toISOString()}

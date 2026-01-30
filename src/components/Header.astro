@@ -2,6 +2,7 @@
 import ThemeToggle from './ThemeToggle';
 
 const base = import.meta.env.BASE_URL;
+const isHome = Astro.url.pathname === base || Astro.url.pathname === `${base}` || Astro.url.pathname === `${base.replace(/\/$/, '')}/`;
 ---
 
 <header class="fixed top-0 left-0 right-0 z-40 backdrop-blur-md bg-light-bg/80 dark:bg-dark-bg/80 border-b border-light-border dark:border-dark-border">
@@ -17,25 +18,25 @@ const base = import.meta.env.BASE_URL;
       
       <div class="flex items-center gap-6">
         <a 
-          href={`${base}#about`}
+          href={isHome ? '#about' : `${base}#about`}
           class="text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
         >
           About
         </a>
         <a 
-          href={`${base}#skills`}
+          href={isHome ? '#skills' : `${base}#skills`}
           class="text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
         >
           Skills
         </a>
         <a 
-          href={`${base}#exploring`}
+          href={isHome ? '#exploring' : `${base}#exploring`}
           class="text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
         >
           Exploring
         </a>
         <a 
-          href={`${base}#blog`}
+          href={isHome ? '#blog' : `${base}#blog`}
           class="text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
         >
           Blog

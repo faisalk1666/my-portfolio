@@ -16,7 +16,8 @@ const isHome = Astro.url.pathname === base || Astro.url.pathname === `${base}` |
         FK
       </a>
       
-      <div class="flex items-center gap-6">
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-6">
         <a 
           href={isHome ? '#about' : `${base}#about`}
           class="text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
@@ -44,6 +45,66 @@ const isHome = Astro.url.pathname === base || Astro.url.pathname === `${base}` |
         
         <ThemeToggle client:load />
       </div>
+
+      <!-- Mobile Menu Button and Theme Toggle -->
+      <div class="flex md:hidden items-center gap-4">
+        <ThemeToggle client:load />
+        <button 
+          id="mobile-menu-button"
+          class="text-light-text dark:text-dark-text hover:text-light-accent dark:hover:text-dark-accent transition-colors"
+          aria-label="Toggle menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 space-y-3">
+      <a 
+        href={isHome ? '#about' : `${base}#about`}
+        class="block text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
+      >
+        About
+      </a>
+      <a 
+        href={isHome ? '#skills' : `${base}#skills`}
+        class="block text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
+      >
+        Skills
+      </a>
+      <a 
+        href={isHome ? '#exploring' : `${base}#exploring`}
+        class="block text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
+      >
+        Exploring
+      </a>
+      <a 
+        href={isHome ? '#blog' : `${base}#blog`}
+        class="block text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
+      >
+        Blog
+      </a>
     </div>
   </nav>
 </header>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Close mobile menu when clicking a link
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
+  });
+</script>

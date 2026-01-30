@@ -5,6 +5,8 @@ const blogPosts = await getCollection('blog');
 const sortedPosts = blogPosts.sort((a, b) => 
   new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
 );
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <section id="blog" class="py-20 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface">
@@ -34,7 +36,7 @@ const sortedPosts = blogPosts.sort((a, b) =>
                    transition-all duration-300 hover:shadow-lg animate-slide-up"
             style={`animation-delay: ${index * 100}ms`}
           >
-            <a href={`/blog/${post.slug}`} class="block">
+            <a href={`${base}blog/${post.slug}/`} class="block">
               <time
                 class="text-sm text-light-textSecondary dark:text-dark-textSecondary"
                 datetime={post.data.publishDate.toISOString()}

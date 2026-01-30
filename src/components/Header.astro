@@ -1,12 +1,14 @@
 ---
 import ThemeToggle from './ThemeToggle';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <header class="fixed top-0 left-0 right-0 z-40 backdrop-blur-md bg-light-bg/80 dark:bg-dark-bg/80 border-b border-light-border dark:border-dark-border">
   <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
     <div class="flex items-center justify-between">
       <a 
-        href="/" 
+        href={base}
         class="text-xl font-bold text-light-text dark:text-dark-text hover:text-light-accent dark:hover:text-dark-accent transition-colors"
         aria-label="Home"
       >
@@ -15,25 +17,25 @@ import ThemeToggle from './ThemeToggle';
       
       <div class="flex items-center gap-6">
         <a 
-          href="#about" 
+          href={`${base}#about`}
           class="text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
         >
           About
         </a>
         <a 
-          href="#skills" 
+          href={`${base}#skills`}
           class="text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
         >
           Skills
         </a>
         <a 
-          href="#exploring" 
+          href={`${base}#exploring`}
           class="text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
         >
           Exploring
         </a>
         <a 
-          href="#blog" 
+          href={`${base}#blog`}
           class="text-sm font-medium text-light-textSecondary dark:text-dark-textSecondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
         >
           Blog

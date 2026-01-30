@@ -1,0 +1,75 @@
+---
+// Background component with theme-aware decorative elements
+---
+
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
+  <!-- Light theme - Sunny day gradient -->
+  <div class="light-bg-gradient absolute inset-0 opacity-0 dark:opacity-0 light:opacity-100 transition-opacity duration-500">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-orange-200/30 to-yellow-200/30 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-amber-200/30 to-orange-100/30 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- Dark theme - Starry night -->
+  <div class="dark-bg-gradient absolute inset-0 opacity-0 light:opacity-0 dark:opacity-100 transition-opacity duration-500">
+    <!-- Gradient background -->
+    <div class="absolute inset-0 bg-gradient-to-b from-dark-bg via-dark-surface/50 to-dark-bg"></div>
+    
+    <!-- Stars -->
+    <div class="stars-container absolute inset-0">
+      {Array.from({ length: 50 }).map((_, i) => (
+        <div
+          class="absolute w-1 h-1 bg-white rounded-full animate-twinkle"
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 3}s`,
+            opacity: 0.3 + Math.random() * 0.7,
+          }}
+        />
+      ))}
+    </div>
+    
+    <!-- Larger accent stars -->
+    <div class="accent-stars absolute inset-0">
+      {Array.from({ length: 10 }).map((_, i) => (
+        <div
+          class="absolute w-2 h-2 bg-blue-300 rounded-full animate-twinkle"
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 3}s`,
+            opacity: 0.2 + Math.random() * 0.4,
+          }}
+        />
+      ))}
+    </div>
+
+    <!-- Constellation effect (abstract geometric) -->
+    <svg class="absolute inset-0 w-full h-full opacity-10">
+      <line x1="10%" y1="20%" x2="30%" y2="40%" stroke="currentColor" stroke-width="0.5" class="text-blue-400" />
+      <line x1="30%" y1="40%" x2="45%" y2="30%" stroke="currentColor" stroke-width="0.5" class="text-blue-400" />
+      <line x1="70%" y1="60%" x2="85%" y2="75%" stroke="currentColor" stroke-width="0.5" class="text-blue-400" />
+      <line x1="85%" y1="75%" x2="90%" y2="50%" stroke="currentColor" stroke-width="0.5" class="text-blue-400" />
+      <circle cx="10%" cy="20%" r="2" fill="currentColor" class="text-blue-300" />
+      <circle cx="30%" cy="40%" r="2" fill="currentColor" class="text-blue-300" />
+      <circle cx="45%" cy="30%" r="2" fill="currentColor" class="text-blue-300" />
+      <circle cx="70%" cy="60%" r="2" fill="currentColor" class="text-blue-300" />
+      <circle cx="85%" cy="75%" r="2" fill="currentColor" class="text-blue-300" />
+      <circle cx="90%" cy="50%" r="2" fill="currentColor" class="text-blue-300" />
+    </svg>
+  </div>
+</div>
+
+<style>
+  .light\:opacity-100 {
+    opacity: 1;
+  }
+  
+  html.light .light\:opacity-100 {
+    opacity: 1;
+  }
+  
+  html.dark .dark\:opacity-100 {
+    opacity: 1;
+  }
+</style>

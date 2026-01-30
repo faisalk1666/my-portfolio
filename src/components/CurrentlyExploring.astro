@@ -1,0 +1,97 @@
+---
+const explorations = [
+  {
+    title: 'AI & Machine Learning',
+    description: 'Exploring LLM integration, prompt engineering, and building AI-powered applications.',
+    tags: ['OpenAI', 'LangChain', 'RAG'],
+    status: 'active',
+  },
+  {
+    title: 'Modern Web Frameworks',
+    description: 'Diving deep into Astro, experimenting with server components and edge computing.',
+    tags: ['Astro', 'React Server Components', 'Edge Functions'],
+    status: 'active',
+  },
+  {
+    title: 'System Design',
+    description: 'Studying distributed systems, event-driven architecture, and scalability patterns.',
+    tags: ['Microservices', 'Event Sourcing', 'CQRS'],
+    status: 'learning',
+  },
+  {
+    title: 'Developer Experience',
+    description: 'Building tools and workflows that make developers more productive and happy.',
+    tags: ['DX', 'CLI Tools', 'Automation'],
+    status: 'ongoing',
+  },
+];
+---
+
+<section id="exploring" class="py-20 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+        Currently Exploring
+      </h2>
+      <p class="text-lg text-light-textSecondary dark:text-dark-textSecondary max-w-2xl mx-auto">
+        Areas I'm actively learning and experimenting with. Growth is a continuous journey.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {explorations.map((item, index) => (
+        <article
+          class="group relative p-6 rounded-xl 
+                 border border-light-border dark:border-dark-border
+                 bg-light-surface dark:bg-dark-surface
+                 hover:border-light-accent dark:hover:border-dark-accent
+                 transition-all duration-300 hover:shadow-lg animate-slide-up"
+          style={`animation-delay: ${index * 100}ms`}
+        >
+          {/* Status badge */}
+          <div class="absolute top-4 right-4">
+            <span
+              class="px-2 py-1 text-xs font-medium rounded-full
+                     bg-light-accent/10 dark:bg-dark-accent/10
+                     text-light-accent dark:text-dark-accent
+                     border border-light-accent/20 dark:border-dark-accent/20"
+            >
+              {item.status}
+            </span>
+          </div>
+
+          <h3 class="text-xl font-semibold mb-3 pr-20">
+            {item.title}
+          </h3>
+          
+          <p class="text-light-textSecondary dark:text-dark-textSecondary mb-4 leading-relaxed">
+            {item.description}
+          </p>
+          
+          <div class="flex flex-wrap gap-2">
+            {item.tags.map((tag) => (
+              <span
+                class="px-2 py-1 text-xs rounded-md
+                       bg-light-bg dark:bg-dark-bg
+                       text-light-textSecondary dark:text-dark-textSecondary
+                       border border-light-border dark:border-dark-border"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Decorative corner accent */}
+          <div
+            class="absolute bottom-0 right-0 w-20 h-20 opacity-0 
+                   group-hover:opacity-100 transition-opacity duration-300"
+          >
+            <svg viewBox="0 0 100 100" class="text-light-accent/10 dark:text-dark-accent/10">
+              <path d="M100,100 L100,50 Q100,100 50,100 Z" fill="currentColor" />
+            </svg>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

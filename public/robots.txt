@@ -1,0 +1,5 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+Sitemap: https://faisalk1666.github.io/my-portfolio/sitemap-index.xml

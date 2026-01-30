@@ -1,0 +1,84 @@
+---
+import { getCollection } from 'astro:content';
+
+const blogPosts = await getCollection('blog');
+const sortedPosts = blogPosts.sort((a, b) => 
+  new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+---
+
+<section id="blog" class="py-20 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+        Blog
+      </h2>
+      <p class="text-lg text-light-textSecondary dark:text-dark-textSecondary max-w-2xl mx-auto">
+        Thoughts on software development, lessons learned, and explorations in tech.
+      </p>
+    </div>
+
+    {sortedPosts.length === 0 ? (
+      <div class="text-center py-12">
+        <p class="text-light-textSecondary dark:text-dark-textSecondary">
+          Coming soon! I'm working on sharing insights and experiences from my journey.
+        </p>
+      </div>
+    ) : (
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortedPosts.map((post, index) => (
+          <article
+            class="group p-6 rounded-xl border border-light-border dark:border-dark-border
+                   bg-light-bg dark:bg-dark-bg
+                   hover:border-light-accent dark:hover:border-dark-accent
+                   transition-all duration-300 hover:shadow-lg animate-slide-up"
+            style={`animation-delay: ${index * 100}ms`}
+          >
+            <a href={`/blog/${post.slug}`} class="block">
+              <time
+                class="text-sm text-light-textSecondary dark:text-dark-textSecondary"
+                datetime={post.data.publishDate.toISOString()}
+              >
+                {post.data.publishDate.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+              
+              <h3 class="text-xl font-semibold mt-2 mb-3 group-hover:text-light-accent dark:group-hover:text-dark-accent transition-colors">
+                {post.data.title}
+              </h3>
+              
+              <p class="text-light-textSecondary dark:text-dark-textSecondary line-clamp-3">
+                {post.data.description}
+              </p>
+              
+              {post.data.tags && post.data.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mt-4">
+                  {post.data.tags.slice(0, 3).map((tag: string) => (
+                    <span
+                      class="px-2 py-1 text-xs rounded-md
+                             bg-light-surface dark:bg-dark-surface
+                             text-light-textSecondary dark:text-dark-textSecondary
+                             border border-light-border dark:border-dark-border"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+              
+              <div class="mt-4 flex items-center text-light-accent dark:text-dark-accent text-sm font-medium">
+                Read more
+                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
